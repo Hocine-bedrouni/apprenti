@@ -6,6 +6,7 @@ import com.example.apprenti.entity.Role;
 import com.example.apprenti.repository.ProductRepository;
 import com.example.apprenti.repository.RoleRepository;
 import com.example.apprenti.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 @SpringBootApplication
+@Slf4j
 public class ApprentiApplication {
 
 
@@ -47,14 +49,13 @@ public class ApprentiApplication {
             var p2 = productRepository.save(prod);
             var p4 = productRepository.findById(p2.getId());
              if (Objects.equals(p2.getId(), p4.get().getId())){
-                 System.out.println("tutu");
+                 log.warn("tutu");
              } else {
-                 System.out.println("toto");
-             };
+                 log.warn("toto");
+             }
 
-           ;
-            System.out.println(p2.getLabel());
-            System.out.println(appUser.getName());
+            log.info(p2.getLabel());
+            log.info(appUser.getName());
         };
     }
 
