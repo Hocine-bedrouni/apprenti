@@ -11,7 +11,17 @@ public interface UserService {
 
     Optional<AppUser> getUserById(Long id);
 
-    AppUser getUserByName(String name);
+    Optional<AppUser> getUserByName(String name);
 
-    AppUser getUserByFirstName(String firstName);
+    Optional<AppUser> getUserByFirstName(String firstName);
+
+    AppUser addUser(AppUser appUser) throws Exception;
+
+    AppUser updateUser(Long id, AppUser appUser);
+
+    void deleteUser(Long id);
+
+
+
+
 }
