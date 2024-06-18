@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public interface ProductService {
@@ -18,13 +17,13 @@ public interface ProductService {
 
     Optional<Product> getProductByDescription(String description);
 
-    Product addProduct(Product product);
+    Product addProduct(Product product) throws Exception;
 
-    Product updateProduct(Product product);
+    Product updateProduct(String id, Product product);
 
-    Product deleteById(UUID uuid);
+    void deleteById(String id);
 
-    Product deleteByName(String name);
+
 
 
 

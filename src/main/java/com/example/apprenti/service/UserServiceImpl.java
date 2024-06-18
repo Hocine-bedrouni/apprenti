@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService{
     public AppUser addUser(AppUser appUser) throws Exception {
        if (appUser.getName() != null && appUser.getFirstName() != null) {
            return this.userRepository.save(appUser);
-       } else throw new Exception("missing user info");
+       } else throw new Exception("Missing user info");
 
     }
 
@@ -74,7 +74,6 @@ public class UserServiceImpl implements UserService{
       }
         this.userRepository.deleteById(id);
         log.warn("You just delete the user : " +id+ "." );
-
     }
 
 
