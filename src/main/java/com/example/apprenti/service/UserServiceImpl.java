@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
@@ -43,37 +43,30 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public AppUser addUser(AppUser appUser) throws Exception {
-       if (appUser.getName() != null && appUser.getFirstName() != null) {
-           return this.userRepository.save(appUser);
-       } else throw new Exception("Missing user info");
+        if (appUser.getName() != null && appUser.getFirstName() != null) {
+            return this.userRepository.save(appUser);
+        } else throw new RuntimeException("Missing user info");
 
     }
 
 
-
     @Override
-    public AppUser updateUser(Long id, AppUser appUser) {
-         return this.userRepository.findById(id).map(user ->{
-             if (user.getName() != null)
-                 user.setName(appUser.getName());
-             if(user.getFirstName() != null)
-                 user.setFirstName(appUser.getFirstName());
-             return this.userRepository.save(user);
-//             if(user.getRoles() != null)
-//                 List<Role> roleList = appUser.getRoles().add();
-//                 user.setRoles(roleList);
-//                 TODO role et avec optional
-         }
-         ).orElseThrow(()-> new RuntimeException("User with id :" +id+ " was not found"));
+    public AppUser updateUser(AppUser appUser) {
+        var user = this.userRepository.findById(appUser.getId())
+                .orElseThrow(() -> new RuntimeException("D'oesnt exist"));
+        user.setName(appUser.getName());
+        user.setFirstName(appUser.getFirstName());
+        user.setRoles(appUser.getRoles());
+        return null;
     }
 
     @Override
     public void deleteUser(Long id) {
-      if (getUserById(id).isEmpty()){
-          throw new RuntimeException("User with id :" +id+ " was not found");
-      }
+        if (getUserById(id).isEmpty()) {
+            throw new RuntimeException("User with id :" + id + " was not found");
+        }
         this.userRepository.deleteById(id);
-        log.warn("You just delete the user : " +id+ "." );
+        log.warn("You just delete the user : " + id + ".");
     }
 
 

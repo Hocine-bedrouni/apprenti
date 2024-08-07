@@ -11,7 +11,7 @@ public interface ProductService {
 
     List<Product> getAllProduct();
 
-    Optional<Product> getProductById(String id);
+    Optional<Product> getProductById(Long id);
 
     Optional<Product> getProductByLabel(String label);
 
@@ -19,9 +19,9 @@ public interface ProductService {
 
     Product addProduct(Product product) throws Exception;
 
-    Product updateProduct(String id, Product product);
+    Product updateProduct(Long id, Product product);
 
-    void deleteById(String id);
+    void deleteById(Long id);
 
 
 

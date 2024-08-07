@@ -17,7 +17,7 @@ public interface UserService {
 
     AppUser addUser(AppUser appUser) throws Exception;
 
-    AppUser updateUser(Long id, AppUser appUser);
+    AppUser updateUser(AppUser appUser);
 
     void deleteUser(Long id);
 

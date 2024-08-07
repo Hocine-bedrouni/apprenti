@@ -24,12 +24,10 @@ public class ProductController {
 
     private final ProductService productService;
 
-    private final ProductRepository productRepository;
 
     @Autowired
-    public ProductController(ProductService productService, ProductRepository productRepository) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
-        this.productRepository = productRepository;
     }
 
     @GetMapping("/all")
@@ -40,8 +38,13 @@ public class ProductController {
 
     @GetMapping("/{id}")
     //TODO voir le UUID si possible de recup ou non
-    public ResponseEntity<Product> findProductById(@PathVariable UUID id){
-        return null;
+    public ResponseEntity<Product> findProductById(@PathVariable Long id){
+        Optional<Product> optionalProduct = productService.getProductById(id);
+        if(optionalProduct.isEmpty()){
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok().body(optionalProduct.get());
+        }
     }
 
     @GetMapping("/{label}")

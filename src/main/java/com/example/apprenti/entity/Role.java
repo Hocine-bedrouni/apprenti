@@ -17,8 +17,8 @@ import lombok.Setter;
 public class Role {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String roleName;
 

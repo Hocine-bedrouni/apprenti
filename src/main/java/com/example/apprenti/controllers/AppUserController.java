@@ -63,15 +63,15 @@ public class AppUserController {
             return ResponseEntity.status(HttpStatus.OK).body(user.get());
         }
     }
-
-//    @PostMapping("/user/add/")
-//    public ResponseEntity<AppUser> addUser(@Validated @RequestBody AppUser appUser) {
-//        //TODO Verif validated and to finish
-//        try {
-//            return ResponseEntity.status(HttpStatus.CREATED).body(this.userRepository.save(appUser));
-//        } catch (ConstraintViolationException e) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-//        }
-//    }
+    @CrossOrigin(origins = "*")
+    @PostMapping("/user/add")
+    public ResponseEntity<AppUser> addUser(@Validated @RequestBody AppUser appUser) {
+        //TODO Verif validated and to finish
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.addUser(appUser));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
 
 }

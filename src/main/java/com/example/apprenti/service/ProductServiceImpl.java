@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Optional<Product> getProductById(String id) {
+    public Optional<Product> getProductById(Long id) {
         return productRepository.findById(id);
     }
 
@@ -45,11 +45,11 @@ public class ProductServiceImpl implements ProductService{
     public Product addProduct(Product product) throws Exception {
         if (product.getLabel() != null) {
             return this.productRepository.save(product);
-        } else throw new Exception("Missing product info");
+        } else throw new RuntimeException("Missing product info");
     }
 
     @Override
-    public Product updateProduct(String id, Product product) {
+    public Product updateProduct(Long id, Product product) {
         return this.productRepository.findById(id).map(prod -> {
                     if (prod.getLabel() != null)
                         prod.setLabel(product.getLabel());
@@ -61,9 +61,9 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
         if (getProductById(id).isPresent()){
-            this.productRepository.deleteById(id);
+            this.productRepository.deleteById(String.valueOf(id));
             log.warn("You just delete the product : " +id+ "." );
         } throw new RuntimeException("User with id :" +id+ " was not found");
     }
