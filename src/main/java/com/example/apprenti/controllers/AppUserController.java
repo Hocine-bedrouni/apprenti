@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
 @Slf4j
 public class AppUserController {
 
